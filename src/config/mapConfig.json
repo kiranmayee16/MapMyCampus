@@ -1,0 +1,169 @@
+{
+  "defaultCenter": {
+    "lat": 13.168000,
+    "lng": 77.558353
+  },
+  "defaultZoom": 18,
+  "mapLayers": [
+    {
+      "name": "OpenStreetMap",
+      "url": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "attribution": "&copy; OpenStreetMap contributors",
+      "maxZoom": 22
+    }
+  ],
+  "buildings": [
+    {
+      "id": "block-a",
+      "name": "Block A",
+      "bounds": [
+        [13.168100, 77.558253],
+        [13.168100, 77.558453],
+        [13.167900, 77.558453],
+        [13.167900, 77.558253]
+      ],
+      "floors": [
+        {
+          "level": 1,
+          "name": "Ground Floor",
+          "imageUrl": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8IS0tIE91dGVyIHdhbGxzIC0tPgogIDxyZWN0IHg9IjEwIiB5PSIxMCIgd2lkdGg9IjM4MCIgaGVpZ2h0PSIyODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgogIAogIDwhLS0gRW50cmFuY2UgLS0+CiAgPHJlY3QgeD0iMTcwIiB5PSIyNzAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIyMCIgZmlsbD0ibGlnaHRibHVlIi8+CiAgPHRleHQgeD0iMjAwIiB5PSIyODUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTIiPkVudHJhbmNlPC90ZXh0PgogIAogIDwhLS0gTG9iYnkgLS0+CiAgPHJlY3QgeD0iMTUwIiB5PSIyMDAiIHdpZHRoPSIxMDAiIGhlaWdodD0iNzAiIGZpbGw9ImxpZ2h0Z3JheSIvPgogIDx0ZXh0IHg9IjIwMCIgeT0iMjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIj5Mb2JieTwvdGV4dD4KICAKICA8IS0tIENvcnJpZG9yIC0tPgogIDxyZWN0IHg9IjE4MCIgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxOTAiIGZpbGw9IndoaXRlIi8+CiAgPHRleHQgeD0iMjAwIiB5PSIxMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTAiPkNvcnJpZG9yPC90ZXh0PgogIAogIDwhLS0gUm9vbSAxMDEgLS0+CiAgPHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjgwIiBmaWxsPSJsaWdodGdyZWVuIi8+CiAgPHRleHQgeD0iOTAiIHk9IjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIj5Sb29tIDEwMTwvdGV4dD4KICAKICA8IS0tIFJvb20gMTAyIC0tPgogIDxyZWN0IHg9IjEwIiB5PSIxMDAiIHdpZWRoPSIxNjAiIGhlaWdodD0iODAiIGZpbGw9ImxpZ2h0Z3JlZW4iLz4KICA8dGV4dCB4PSI5MCIgeT0iMTQwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIj5Sb29tIDEwMjwvdGV4dD4KICAKICA8IS0tIFJvb20gMTAzIC0tPgogIDxyZWN0IHg9IjIzMCIgeT0iMTAiIHdpZHRoPSIxNjAiIGhlaWdodD0iODAiIGZpbGw9ImxpZ2h0Z3JlZW4iLz4KICA8dGV4dCB4PSIzMTAiIHk9IjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEyIj5Sb29tIDEwMzwvdGV4dD4KICAKICA8IS0tIFJvb20gMTA0IC0tPgogIDxyZWN0IHg9IjIzMCIgeT0iMTAwIiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjgwIiBmaWxsPSJsaWdodGdyZWVuIi8+CiAgPHRleHQgeD0iMzEwIiB5PSIxNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiBmb250LXNpemU9IjEyIj5Sb29tIDEwNDwvdGV4dD4KICAKICA8IS0tIFN0YWlycyAtLT4KICA8cmVjdCB4PSIzNTAiIHk9IjIwMCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjcwIiBmaWxsPSJsaWdodHllbGxvdyIvPgogIDx0ZXh0IHg9IjM2NSIgeT0iMjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEwIj5TdGFpcnM8L3RleHQ+Cjwvc3ZnPg==",
+          "rooms": [
+            {
+              "id": "entrance",
+              "name": "Entrance",
+              "polygon": [
+                [13.167920, 77.558353],
+                [13.167920, 77.558373],
+                [13.167900, 77.558373],
+                [13.167900, 77.558353]
+              ],
+              "color": "lightblue"
+            },
+            {
+              "id": "lobby",
+              "name": "Lobby",
+              "polygon": [
+                [13.168020, 77.558323],
+                [13.168020, 77.558383],
+                [13.167950, 77.558383],
+                [13.167950, 77.558323]
+              ],
+              "color": "lightgray"
+            },
+            {
+              "id": "corridor",
+              "name": "Corridor",
+              "polygon": [
+                [13.168090, 77.558343],
+                [13.168090, 77.558363],
+                [13.167910, 77.558363],
+                [13.167910, 77.558343]
+              ],
+              "color": "white"
+            },
+            {
+              "id": "room101",
+              "name": "Room 101",
+              "polygon": [
+                [13.168090, 77.558253],
+                [13.168090, 77.558313],
+                [13.168030, 77.558313],
+                [13.168030, 77.558253]
+              ],
+              "color": "lightgreen"
+            },
+            {
+              "id": "room102",
+              "name": "Room 102",
+              "polygon": [
+                [13.168030, 77.558253],
+                [13.168030, 77.558313],
+                [13.167970, 77.558313],
+                [13.167970, 77.558253]
+              ],
+              "color": "lightgreen"
+            },
+            {
+              "id": "room103",
+              "name": "Room 103",
+              "polygon": [
+                [13.168090, 77.558393],
+                [13.168090, 77.558453],
+                [13.168030, 77.558453],
+                [13.168030, 77.558393]
+              ],
+              "color": "lightgreen"
+            },
+            {
+              "id": "room104",
+              "name": "Room 104",
+              "polygon": [
+                [13.168030, 77.558393],
+                [13.168030, 77.558453],
+                [13.167970, 77.558453],
+                [13.167970, 77.558393]
+              ],
+              "color": "lightgreen"
+            },
+            {
+              "id": "stairs",
+              "name": "Stairs",
+              "polygon": [
+                [13.167970, 77.558423],
+                [13.167970, 77.558443],
+                [13.167940, 77.558443],
+                [13.167940, 77.558423]
+              ],
+              "color": "lightyellow"
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "name": "First Floor",
+          "imageUrl": "/floorplans/block-a-first.png"
+        }
+      ]
+    },
+    {
+      "id": "block-b",
+      "name": "Block B",
+      "bounds": [
+        [13.167900, 77.558353],
+        [13.167900, 77.558553],
+        [13.167700, 77.558553],
+        [13.167700, 77.558353]
+      ],
+      "floors": [
+        {
+          "level": 1,
+          "name": "Ground Floor",
+          "imageUrl": "/floorplans/block-b-ground.png"
+        },
+        {
+          "level": 2,
+          "name": "First Floor",
+          "imageUrl": "/floorplans/block-b-first.png"
+        }
+      ]
+    }
+  ],
+  "predefinedLocations": [
+    {
+      "id": "entrance",
+      "name": "Main Entrance",
+      "coordinates": {
+        "lat": 13.168050,
+        "lng": 77.558353
+      }
+    },
+    {
+      "id": "exit",
+      "name": "Emergency Exit",
+      "coordinates": {
+        "lat": 13.167800,
+        "lng": 77.558453
+      }
+    }
+  ]
+}

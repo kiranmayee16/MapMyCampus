@@ -1,0 +1,241 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.map-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.controls-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-routing-container {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: 320px !important;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+.reset-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.reset-button:hover {
+  background-color: #357abd;
+}
+
+.coordinate-control {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.coordinate-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.location-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.location-dropdown {
+  width: 100%;
+}
+
+.location-selector {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.location-selector:hover {
+  border-color: #999;
+}
+
+.location-selector:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.coordinate-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.coordinate-inputs {
+  margin-top: 5px;
+}
+
+.coordinate-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: calc(50% - 35px);
+}
+
+.coordinate-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+.coordinate-submit {
+  padding: 8px 15px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.coordinate-submit:hover {
+  background-color: #357abd;
+}
+
+.coordinate-submit:active {
+  background-color: #2d6da3;
+}
+
+.building-control {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+}
+
+.building-header {
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 8px 8px 0 0;
+}
+
+.building-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.floor-list {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.floor-button {
+  padding: 8px 15px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.floor-button:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.floor-button.active {
+  background: #4a90e2;
+  color: white;
+  border-color: #357abd;
+}
+
+.opacity-control {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
+}
+
+.opacity-slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.opacity-slider-container label {
+  font-size: 12px;
+  color: #666;
+}
+
+.opacity-slider-container input[type="range"] {
+  width: 100%;
+}
+
+.opacity-slider-container span {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
