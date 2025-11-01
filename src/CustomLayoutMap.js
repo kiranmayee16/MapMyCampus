@@ -1,10 +1,15 @@
 import React from 'react';
-import { MapContainer, Polygon, Polyline, Popup, useMap, Marker, useMapEvent } from 'react-leaflet';
+import { MapContainer, useMap, useMapEvent } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import customLayoutConfig from './config/floorPlanConfig.json';
+import RoomDropdown from './components/RoomDropdown';
+import RoomPolygon from './components/RoomPolygon';
+import CorridorPolygon from './components/CorridorPolygon';
+import NavPathPolyline from './components/NavPathPolyline';
+import OtherPathsPolylines from './components/OtherPathsPolylines';
 
 // Helper to fit bounds to all features on mount
-function FitBoundsOnLoad({ rooms, corridors, source, target, paths }) {
+const FitBoundsOnLoad = React.memo(function FitBoundsOnLoad({ rooms, corridors, source, target, paths }) {
   const map = useMap();
   React.useEffect(() => {
     const allPoints = [];
@@ -18,82 +23,112 @@ function FitBoundsOnLoad({ rooms, corridors, source, target, paths }) {
     }
   }, [map, rooms, corridors, source, target, paths]);
   return null;
-}
+});
 
-function ClickLogger() {
+const ClickLogger = React.memo(function ClickLogger() {
   useMapEvent('click', (e) => {
     const { lat, lng } = e.latlng;
-    console.log('Clicked coordinates:', [lat, lng]);
+    // For production, comment out or remove debug logs
+    // console.log('Clicked coordinates:', [lat, lng]);
   });
   return null;
+});
+
+// RoomCoordsLabels removed (unused)
+
+// Helper: get center of a polygon
+function getPolygonCenter(polygon) {
+  const l = polygon.length;
+  const [sumLat, sumLng] = polygon.reduce(
+    ([accLat, accLng], [lat, lng]) => [accLat + lat, accLng + lng],
+    [0, 0]
+  );
+  return [sumLat / l, sumLng / l];
 }
 
-function RoomCoordsLabels({ polygon }) {
-  // No longer used; coordinate labels are not shown by default
-  return null;
+function getCorridorCenters(corridors) {
+  if (!corridors) return [];
+  return corridors.map(corr => getPolygonCenter(corr.polygon));
 }
+
+function findNearestPoint(point, points) {
+  let minDist = Infinity, nearest = null;
+  points.forEach(pt => {
+    const d = Math.hypot(pt[0] - point[0], pt[1] - point[1]);
+    if (d < minDist) {
+      minDist = d;
+      nearest = pt;
+    }
+  });
+  return nearest;
+}
+
 
 function CustomLayoutMap() {
-  const { center, zoom, rooms, corridors, paths, source, target } = customLayoutConfig;
+  const { center, zoom, rooms, corridors, paths } = customLayoutConfig;
+  const [sourceRoomId, setSourceRoomId] = React.useState('');
+  const [targetRoomId, setTargetRoomId] = React.useState('');
 
-  // Compute navigation path if source and target are present
+  const sourceRoom = rooms.find(r => r.id === sourceRoomId);
+  const targetRoom = rooms.find(r => r.id === targetRoomId);
+
+  // Compute navigation path if both source and target are selected
   let navPath = null;
-  if (source && target) {
-    navPath = [source, target];
+  if (sourceRoom && targetRoom) {
+    const srcCenter = getPolygonCenter(sourceRoom.polygon);
+    const tgtCenter = getPolygonCenter(targetRoom.polygon);
+    const corridorCenters = getCorridorCenters(corridors);
+    const srcCorr = findNearestPoint(srcCenter, corridorCenters);
+    const tgtCorr = findNearestPoint(tgtCenter, corridorCenters);
+    navPath = [srcCenter];
+    if (srcCorr) navPath.push(srcCorr);
+    if (tgtCorr && tgtCorr !== srcCorr) navPath.push(tgtCorr);
+    navPath.push(tgtCenter);
   }
-
-  // Only render additional paths if they are not the same as navPath
   const showPaths = !navPath && paths;
+  const roomOptions = rooms.map(room => ({ id: room.id, name: room.name || room.id }));
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 5000, background: '#f8fafd', width: '100vw', height: '100vh', minHeight: 0, minWidth: 0 }}>
+      <div style={{ position: 'absolute', top: 20, left: 20, zIndex: 6000, background: '#fff', padding: 12, borderRadius: 8, boxShadow: '0 2px 8px #0002' }}>
+        <RoomDropdown
+          label="Source"
+          value={sourceRoomId}
+          onChange={setSourceRoomId}
+          options={roomOptions}
+          excludeId={targetRoomId}
+        />
+        &nbsp;&nbsp;
+        <RoomDropdown
+          label="Destination"
+          value={targetRoomId}
+          onChange={setTargetRoomId}
+          options={roomOptions}
+          excludeId={sourceRoomId}
+        />
+      </div>
       <MapContainer
         center={center}
         zoom={zoom}
         style={{ width: '100vw', height: '100vh', minHeight: 0, minWidth: 0 }}
         whenReady={map => map.target.invalidateSize()}
       >
-        <FitBoundsOnLoad rooms={rooms} corridors={corridors} source={source} target={target} paths={paths} />
+        <FitBoundsOnLoad
+          rooms={rooms}
+          corridors={corridors}
+          source={sourceRoom && getPolygonCenter(sourceRoom.polygon)}
+          target={targetRoom && getPolygonCenter(targetRoom.polygon)}
+          paths={paths}
+        />
         <ClickLogger />
-        {/* No TileLayer, just custom layout */}
         {rooms.map(room => (
-          <Polygon
-            key={room.id}
-            positions={room.polygon}
-            pathOptions={{ color: room.color || '#3388ff', fillOpacity: 0.7, weight: 3 }}
-            eventHandlers={{
-              click: () => {
-                console.log(`Room ${room.name || room.id} polygon:`, room.polygon);
-              }
-            }}
-          >
-            <Popup>Room {room.name || room.id}</Popup>
-          </Polygon>
+          <RoomPolygon key={room.id} room={room} onClick={r => {}} />
         ))}
         {corridors && corridors.map((corr, idx) => (
-          <Polygon
-            key={`corridor-${idx}`}
-            positions={corr.polygon}
-            pathOptions={{ color: corr.color || '#ff9800', fillOpacity: 0.4, weight: 2, dashArray: '6 6' }}
-          >
-            <Popup style={{background:"red"}}>Corridor</Popup>
-          </Polygon>
+          <CorridorPolygon key={`corridor-${idx}`} corridor={corr} />
         ))}
-        {/* Only show Polyline if source and target are present */}
-        {navPath && (
-          <Polyline
-            positions={navPath}
-            pathOptions={{ color: '#43a047', weight: 6, dashArray: '10 10' }}
-          />
-        )}
-        {/* Only render additional paths if not showing navPath */}
-        {showPaths && paths.map((path, idx) => (
-          <Polyline
-            key={`path-${idx}`}
-            positions={path.points}
-            pathOptions={{ color: path.color || '#43a047', weight: 4, dashArray: '6 6' }}
-          />
-        ))}
+        <NavPathPolyline navPath={navPath} />
+        {showPaths && <OtherPathsPolylines paths={paths} />}
       </MapContainer>
     </div>
   );
